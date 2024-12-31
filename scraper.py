@@ -43,12 +43,11 @@ def get_formatted_article_text(url):
         return ""
     
     soup = BeautifulSoup(response.text, "html.parser")
-    print("Successfully fetched the article with link: ", url)
+    print("Fetching article text with link: ", url)
 
     article_content = soup.find("div", class_ = "prose--styled justify-self-center post_postContent__wGZtc")
 
     if article_content:
-        print(f"\tExtracting text...")
         def preserve_links(tag):
             """
             Replace each <a> with its text (surrounded by spaces to avoid concatenation).
@@ -97,8 +96,6 @@ def get_formatted_article_text(url):
             formatted_content_list.append(section_text)
 
         formatted_content = "\n\n".join(formatted_content_list)
-
-        print("Formatted Content for LLM:")
         return formatted_content
         # print(formatted_content)
     else:
