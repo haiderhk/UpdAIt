@@ -48,7 +48,7 @@ def create_metadata(docs, article_index, all_articles_links, all_articles_titles
         metadatas.append(
             {
                 "chunk_heading": heading,
-                "chunk_index": index,
+                "source": index,
                 "article_title": article_title, 
                 "article_link": article_link
             })
