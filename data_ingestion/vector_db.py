@@ -7,7 +7,7 @@ from utils.utils import get_article_chunks, parse_article_index, create_metadata
 
 def get_vector_store():
     embeddings = OpenAIEmbeddings(model = "text-embedding-3-small")
-    return Chroma(collection_name="articles_collection", embedding_function=embeddings)
+    return Chroma(collection_name="articles_collection", embedding_function=embeddings, persist_directory="./vector_db")
 
 def add_articles_to_vector_db(dir_name, vector_store, all_articles_links, all_articles_titles):
     for filename in os.listdir(dir_name):
