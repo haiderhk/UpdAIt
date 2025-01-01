@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-from utils import get_website_html, save_all_articles_text
+from utils.utils import get_website_html, save_all_articles_text
 from data_ingestion.vector_db import get_vector_store, add_articles_to_vector_db
 from data_ingestion.scraper import get_featured_article_link, get_articles_links, get_article_titles
 
