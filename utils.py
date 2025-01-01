@@ -1,5 +1,6 @@
-import requests, re
+import requests, re, time, os
 from langchain.text_splitter import MarkdownTextSplitter
+from data_ingestion.scraper import get_formatted_article_text
 
 def get_website_html(url):
     response = requests.get(url)
@@ -10,6 +11,20 @@ def get_article_chunks(article_text):
     markdown_splitter = MarkdownTextSplitter(chunk_size = 2000, chunk_overlap = 200)
     docs = markdown_splitter.split_text(article_text)
     return docs
+
+
+def save_all_articles_text(all_articles_links, dir_name):
+    os.makedirs(dir_name, exist_ok=True)
+    for index, link in enumerate(all_articles_links):
+        article_text = get_formatted_article_text(link)
+        slug = re.sub(r'https?://[^/]+/', '', link)  # remove scheme and domain
+        slug = slug.strip("/").replace("/", "_")     # turn '/the-batch/issue-281/' -> 'the-batch_issue-281'
+        file_name = f"article_{index}_{slug}.txt"
+        file_path = os.path.join(dir_name, file_name)
+        with open(file_path, "w", encoding="utf-8") as f:
+            f.write(article_text)
+            print(f"Saved: {file_path}\n")
+        time.sleep(1) # Delay to not overwhelm the server :)
 
 
 def parse_article_index(filename: str) -> int:
@@ -24,6 +39,7 @@ def parse_article_index(filename: str) -> int:
         return int(match.group(1))
     return None
 
+
 def extract_chunk_heading(doc):
     if doc.startswith('##'):
         pattern = re.compile(r'^##\s+(.*)$', re.MULTILINE)
@@ -35,6 +51,7 @@ def extract_chunk_heading(doc):
         first_four = words[:4]
         heading = ' '.join(first_four)
         return heading
+
 
 def create_metadata(docs, article_index, all_articles_links, all_articles_titles):
     ids = []
