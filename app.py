@@ -1,9 +1,16 @@
+from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from langchain_openai import ChatOpenAI
 from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
 
 from data_ingestion.ingestion import vector_store
 from dotenv import load_dotenv
+
+class QueryRequest(BaseModel):
+    question: str
+
+class QueryResponse(BaseModel):
+    answer: str
 
 app = FastAPI()
 
@@ -18,11 +25,11 @@ chain = RetrievalQAWithSourcesChain.from_llm(llm = llm, retriever = retriever)
 def root():
     return {"message": "Welcome to the DeepLearning.AI InfoHub!"}
 
-@app.get('/query')
-def query(question: str):
+@app.post('/query', response_model=QueryResponse)
+def query(request: QueryRequest):
     try:
-        result = chain.invoke({"question": question}, return_only_outputs = True)
-        return {"answer": result["answer"]}
+        result = chain.invoke({"question": request.question}, return_only_outputs = True)
+        return QueryResponse(answer=result['answer'])
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
