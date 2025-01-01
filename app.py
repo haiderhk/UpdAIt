@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 from langchain_openai import ChatOpenAI
 from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
 
-from data_ingestion.ingestion import vector_store
+from data_ingestion.ingestion import get_vector_store
 from dotenv import load_dotenv
 
 class QueryRequest(BaseModel):
@@ -17,6 +17,7 @@ app = FastAPI()
 load_dotenv()
 
 llm = ChatOpenAI(model = "gpt-4o-mini", temperature=0.5, max_tokens = 256)
+vector_store = get_vector_store()
 retriever = vector_store.as_retriever()
 chain = RetrievalQAWithSourcesChain.from_llm(llm = llm, retriever = retriever)
 
