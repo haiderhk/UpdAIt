@@ -170,6 +170,8 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+notebooks/test.ipynb
 saved_articles/
 .DS_Store
 .DS_Store?
+/vector_db
