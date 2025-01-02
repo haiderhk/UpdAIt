@@ -1,1 +1,3 @@
 # UpdAIt
+
+A RAG Application
