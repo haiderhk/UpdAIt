@@ -24,7 +24,7 @@ chain = RetrievalQAWithSourcesChain.from_llm(llm = llm, retriever = retriever)
 
 @app.get('/')
 def root():
-    return {"message": "Welcome to the DeepLearning.AI InfoHub!"}
+    return {"message": "Welcome to the DeepLearning.AI InfoHub v2!"}
 
 @app.post('/query', response_model=QueryResponse)
 def query(request: QueryRequest):
