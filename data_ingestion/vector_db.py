@@ -2,7 +2,7 @@ import os, time
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
-from utils.utils import get_article_chunks, parse_article_index, create_metadata
+from data_ingestion.utils.utils import get_article_chunks, parse_article_index, create_metadata
 
 
 def get_vector_store():
