@@ -5,6 +5,7 @@ from typing import List
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
+import data_ingestion.ingestion
 
 load_dotenv()
 
