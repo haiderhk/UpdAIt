@@ -17,5 +17,4 @@ EXPOSE 8000
 VOLUME /app/chroma_db
 
 # Start FastAPI app
-# Start ingestion.py and then the FastAPI app
-CMD ["sh", "-c", "python -m data_ingestion.ingestion.py && uvicorn app:app --host 0.0.0.0 --port 8000"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
