@@ -1,13 +1,15 @@
+import data_ingestion.ingestion
 from model import generate_response
+from data_ingestion.fetch import process_vector_store_metadatas
 
 import asyncio
 from typing import List
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
-import data_ingestion.ingestion
 
 load_dotenv()
+
 
 class QueryRequest(BaseModel):
     question: str
@@ -36,3 +38,8 @@ async def query(request: QueryRequest):
         return QueryResponse(answer=result, metadata=metadata)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+@app.get('/fetch')
+def fetch_articles():
+    articles = process_vector_store_metadatas()
+    return {"articles": articles}
