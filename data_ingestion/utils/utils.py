@@ -1,4 +1,5 @@
 import requests, re, time, os
+from urllib.parse import unquote
 from langchain.text_splitter import MarkdownTextSplitter
 from data_ingestion.scraper import get_formatted_article_text
 
@@ -109,3 +110,5 @@ def create_vector_store_response(docs):
 
             links.append(article_link)
     return sources
+
+

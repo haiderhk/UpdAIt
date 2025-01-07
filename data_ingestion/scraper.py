@@ -1,5 +1,6 @@
-import requests
+import requests, re
 from bs4 import BeautifulSoup
+from urllib.parse import unquote
 
 BASE_URL = "https://www.deeplearning.ai"
 
@@ -118,3 +119,79 @@ def get_formatted_article_text(url):
     else:
         print("Could not find the main article content container for link: ", url)
         return ""
+    
+
+
+# Functions to Fetch Articles with required Metadata
+
+def get_articles_publication_dates(base_url_html):
+    soup = BeautifulSoup(base_url_html, "html.parser")
+    article_dates = []
+    featured_article_date = soup.find("div", class_ = "inline-flex rounded-md py-1 px-3 text-[13px] font-medium mb-3 relative z-10 bg-white text-slate-500")
+    article_dates.append(featured_article_date.text)
+    dates_div = soup.find_all("div", class_ = "inline-flex rounded-md py-1 px-3 text-[13px] font-medium mb-3 relative z-10 bg-slate-100 text-slate-500")
+    for div in dates_div:
+        article_dates.append(div.text)
+    return article_dates
+
+
+
+def extract_original_url(url_str):
+    match = re.search(r'url=(.*?)(?:&amp;|&)', url_str)
+    if match:
+        return unquote(match.group(1))
+    return None
+
+
+
+def extract_featured_article_image_url(html):
+    soup = BeautifulSoup(html, "html.parser")
+    noscript_img = soup.select_one("div.aspect-w-16 noscript img")
+
+    if noscript_img and noscript_img.get('src'):
+        src = noscript_img.get('src')
+        # Extract everything between 'url=' and '&' or '&amp;'
+        url_part = re.search(r'url=(.*?)(?:&amp;|&)', src).group(1)
+        original_url = unquote(url_part)
+        print("Featured image URL:", original_url)
+        return original_url
+    else:
+        print("Could not find the featured image URL")
+        return ""
+    
+
+def extract_featured_article_image_url(html):
+    soup = BeautifulSoup(html, "html.parser")
+    noscript_img = soup.select_one("div.aspect-w-16 noscript img")
+
+    if noscript_img and noscript_img.get('src'):
+        src = noscript_img.get('src')
+        # Extract everything between 'url=' and '&' or '&amp;'
+        url_part = re.search(r'url=(.*?)(?:&amp;|&)', src).group(1)
+        original_url = unquote(url_part)
+        print("Featured image URL:", original_url)
+        return original_url
+    else:
+        print("Could not find the featured image URL")
+        return ""
+
+
+def extract_images_urls(html):
+    image_urls = []
+    soup = BeautifulSoup(html, "html.parser")
+    image_urls.append(extract_featured_article_image_url(html))
+    article_divs = soup.find_all("div", class_="aspect-w-16 aspect-h-9 rounded-t-lg overflow-hidden bg-slate-200")
+    for div in article_divs:
+        span = div.find("span")
+        if span:
+            noscript = span.find("noscript")
+            if noscript:
+                img = noscript.find("img")
+                if img and img.get('src'):
+                    url = extract_original_url(img.get('src'))
+                    if url:
+                        image_urls.append(url)
+                        # Get the alternative text (if needed)
+                        # alt_text = img.get('alt', '')
+                        # image_urls.append({'url': url, 'alt': alt_text})
+    return image_urls
