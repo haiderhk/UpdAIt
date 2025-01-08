@@ -1,5 +1,6 @@
 import data_ingestion.ingestion
 from model.model import generate_response, generate_questions
+from model.schema import QuestionAnswers
 from data_ingestion.fetch import process_vector_store_metadatas
 
 import uvicorn
@@ -26,7 +27,7 @@ class QueryResponse(BaseModel):
     answer: str
     metadata: List[Metadata]
 
-class ArticleLink(BaseModel):
+class QuestionsRequestModel(BaseModel):
     article_link: str
 
 app = FastAPI()
@@ -48,8 +49,9 @@ def fetch_articles():
     articles = process_vector_store_metadatas()
     return {"articles": articles}
 
-@app.post('/generate-questions')
-def generate_questions(request: ArticleLink):
+@app.post('/generate-questions', response_model=QuestionAnswers)
+def questions(request: QuestionsRequestModel):
+    # print(f"The request contains type: {type(request)} with content: {request}\n")
     questions = generate_questions(request.article_link)
     return {"questions": questions}
 
