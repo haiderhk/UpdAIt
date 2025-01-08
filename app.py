@@ -1,4 +1,4 @@
-import data_ingestion.ingestion
+# import data_ingestion.ingestion
 from model.model import generate_response, generate_questions
 from model.schema import QuestionAnswers
 from data_ingestion.fetch import process_vector_store_metadatas
@@ -51,7 +51,6 @@ def fetch_articles():
 
 @app.post('/generate-questions', response_model=QuestionAnswers)
 def questions(request: QuestionsRequestModel):
-    # print(f"The request contains type: {type(request)} with content: {request}\n")
     questions = generate_questions(request.article_link)
     return {"questions": questions}
 
