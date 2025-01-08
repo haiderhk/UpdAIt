@@ -1,13 +1,16 @@
 import data_ingestion.ingestion
-from model import generate_response
+from model.model import generate_response, generate_questions
 from data_ingestion.fetch import process_vector_store_metadatas
 
-import asyncio
+import uvicorn
+import asyncio, os
 from typing import List
+from pyngrok import ngrok
 from pydantic import BaseModel
 from fastapi import FastAPI, HTTPException
-from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
+from dotenv import load_dotenv
 load_dotenv()
 
 
@@ -23,7 +26,8 @@ class QueryResponse(BaseModel):
     answer: str
     metadata: List[Metadata]
 
-
+class ArticleLink(BaseModel):
+    article_link: str
 
 app = FastAPI()
 
@@ -43,3 +47,29 @@ async def query(request: QueryRequest):
 def fetch_articles():
     articles = process_vector_store_metadatas()
     return {"articles": articles}
+
+@app.post('/generate-questions')
+def generate_questions(request: ArticleLink):
+    questions = generate_questions(request.article_link)
+    return {"questions": questions}
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods
+    allow_headers=["*"],  # Allows all headers
+)
+
+if __name__ == "__main__":
+    # Configure ngrok
+    ngrok.set_auth_token(os.environ.get("NGROK_AUTH_TOKEN"))
+    
+    # Start ngrok tunnel to port 8000
+    public_url = ngrok.connect(8000).public_url
+    print(f"ngrok tunnel created at: {public_url}")
+    print(f"Public URL for your API: {public_url}")
+    
+    # Start the FastAPI app
+    uvicorn.run(app, host="0.0.0.0", port=8000)

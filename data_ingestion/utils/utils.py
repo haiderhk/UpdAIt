@@ -112,3 +112,16 @@ def create_vector_store_response(docs):
     return sources
 
 
+def retrieve_article_text(article_link, directory = "saved_articles"):
+    slug = re.sub(r'https?://[^/]+/', '', article_link)  # remove scheme and domain
+    slug = slug.strip("/").replace("/", "_")     # turn '/the-batch/issue-281/' -> 'the-batch_issue-281'
+    for file in os.listdir(directory):
+            if file.endswith(f"{slug}.txt"):
+                print("File found, retrieving its text!")
+                file_path = os.path.join(directory, file)
+                with open(file_path, 'r') as article_file:
+                     article_text = article_file.read()
+                     return article_text
+                
+    print("File cannot be found!")
+    return ""
