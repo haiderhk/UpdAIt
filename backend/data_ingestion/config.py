@@ -1,0 +1,6 @@
+BASE_URL = "https://www.deeplearning.ai"
+THE_BATCH_URL = "https://www.deeplearning.ai/the-batch/"
+VECTOR_STORE_DIR = "./vector_db"
+EMBEDDING_MODEL = "text-embedding-3-small"
+ARTICLES_COLLECTION_NAME = "articles_collection"
+ARTICLES_DIRECTORY = "saved_articles"
