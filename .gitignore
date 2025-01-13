@@ -175,3 +175,30 @@ saved_articles/
 .DS_Store
 .DS_Store?
 /vector_db
+
+
+
+
+
+# SwiftUI stuff below:
+# macOS
+*.xcworkspace
+DerivedData/
+build/
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Xcode
+*.xcodeproj/*
+!*.pbxproj
+!*.xcworkspacedata
+!xcshareddata
+!xcuserdata
+
+# Logs
+*.log
+
+# SwiftUI Previews
+*.preview-thumbnails
