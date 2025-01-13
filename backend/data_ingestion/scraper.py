@@ -1,8 +1,8 @@
 import requests, re
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
-from config import BASE_URL
-from utils import extract_original_url
+from backend.data_ingestion.config import BASE_URL
+from backend.data_ingestion.utils import extract_original_url
 
 class Scraper:
     def __init__(self, base_url):
@@ -44,7 +44,7 @@ class Scraper:
         return articles_titles
     
     
-    def _preserve_links_(tag):
+    def _preserve_links_(self, tag):
         """
         Replace each <a> with its text (surrounded by spaces to avoid concatenation).
         Then gather all text from the tag.
