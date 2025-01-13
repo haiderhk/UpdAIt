@@ -1,4 +1,4 @@
-# import data_ingestion.ingestion
+import data_ingestion.ingestion
 from model.model import generate_response, generate_questions
 from model.schema import QuestionAnswers
 from data_ingestion.fetch import process_vector_store_metadatas
