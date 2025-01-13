@@ -2,9 +2,9 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
 
-from model.schema import QuestionAnswers
-from model.generator import Generator
-from data_ingestion.fetch import process_vector_store_metadatas
+from backend.model.schema import QuestionAnswers
+from backend.model.generator import Generator
+from backend.data_ingestion.fetch import process_vector_store_metadatas
 
 # Initialize the router
 router = APIRouter()

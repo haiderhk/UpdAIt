@@ -1,7 +1,7 @@
-from data_ingestion.scraper import Scraper
-from data_ingestion.vector_db import VectorDB
-from data_ingestion.config import THE_BATCH_URL, ARTICLES_DIRECTORY
-from data_ingestion.utils import save_articles
+from backend.data_ingestion.scraper import Scraper
+from backend.data_ingestion.vector_db import VectorDB
+from backend.data_ingestion.config import THE_BATCH_URL, ARTICLES_DIRECTORY
+from backend.data_ingestion.utils import save_articles
 
 
 def ingest_articles():

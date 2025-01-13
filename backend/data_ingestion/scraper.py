@@ -11,7 +11,7 @@ class Scraper:
         self.soup = BeautifulSoup(self.homepage_html, "html.parser")
 
     
-    def get_featured_article_link(self):
+    def _get_featured_article_link_(self):
         featured_article_div = self.soup.find("div", class_ = "col-span-1 lg:col-span-2")
         link = featured_article_div.find_all("a", href = True)
         if len(link) < 2:
@@ -22,6 +22,7 @@ class Scraper:
     
     def get_all_links(self): #Excluding featured article
         article_links = []
+        article_links.append(self._get_featured_article_link_())
         article_cards = self.soup.select("div.p-6")
         for card in article_cards:
             a_tag = card.find_all("a", href=True)

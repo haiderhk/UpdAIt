@@ -2,8 +2,7 @@ import os, re, time
 from urllib.parse import unquote
 from langchain.text_splitter import MarkdownTextSplitter
 
-from data_ingestion.config import ARTICLES_DIRECTORY
-from data_ingestion.scraper import Scraper
+from backend.data_ingestion.config import ARTICLES_DIRECTORY
 
 
 def extract_original_url(url_str):
@@ -44,7 +43,7 @@ def extract_chunk_heading(doc):
         return heading
     
 
-def save_articles(scraper: Scraper, links):
+def save_articles(scraper, links):
     os.makedirs(ARTICLES_DIRECTORY, exist_ok=True)
     saved_issues = set()
     

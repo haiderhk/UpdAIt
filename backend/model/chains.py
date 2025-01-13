@@ -1,5 +1,5 @@
 from langchain.chains.qa_with_sources.retrieval import RetrievalQAWithSourcesChain
-from model.llm import LLMManager
+from backend.model.llm import LLMManager
 
 class ChainManager():
     def __init__(self):
