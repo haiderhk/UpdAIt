@@ -1,11 +1,15 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List
-from model.model import generate_response, generate_questions
+
 from model.schema import QuestionAnswers
+from model.generator import Generator
 from data_ingestion.fetch import process_vector_store_metadatas
 
-# Define request/response schemas
+# Initialize the router
+router = APIRouter()
+generator = Generator()
+
 class QueryRequest(BaseModel):
     question: str
 
@@ -22,8 +26,6 @@ class QueryResponse(BaseModel):
 class QuestionsRequestModel(BaseModel):
     article_link: str
 
-# Initialize the router
-router = APIRouter()
 
 @router.get("/")
 def root():
@@ -32,7 +34,7 @@ def root():
 @router.post("/query", response_model=QueryResponse)
 async def query(request: QueryRequest):
     try:
-        result, metadata = await generate_response(request.question)
+        result, metadata = await generator.generate_response(request.question)
         return QueryResponse(answer=result, metadata=metadata)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -44,5 +46,5 @@ def fetch_articles():
 
 @router.post("/generate-questions", response_model=QuestionAnswers)
 def questions(request: QuestionsRequestModel):
-    questions = generate_questions(request.article_link)
+    questions = generator.generate_questions(request.article_link)
     return {"questions": questions}

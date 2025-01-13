@@ -55,3 +55,27 @@ class VectorDB:
                 })
             ids.append(f"id{article_index}_{index}")
         return metadatas, ids
+    
+    
+    def create_vector_store_response(docs):
+        sources = []
+        links = []
+
+        for doc in docs:
+            article_link = doc[0].metadata['article_link']
+            article_title = doc[0].metadata['article_title']
+            chunk_heading = doc[0].metadata['chunk_heading']
+            score = doc[1]
+
+            if article_link not in links:
+                article_dict = {
+                    "article_link": article_link,
+                    "article_title": article_title,
+                    "chunk_heading": chunk_heading,
+                    "score": score
+                }
+
+                sources.append(article_dict)
+
+                links.append(article_link)
+        return sources
