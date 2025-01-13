@@ -57,7 +57,7 @@ class VectorDB:
         return metadatas, ids
     
     
-    def create_vector_store_response(docs):
+    def create_vector_store_response(self, docs):
         sources = []
         links = []
 
