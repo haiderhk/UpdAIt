@@ -17,4 +17,4 @@ EXPOSE 8000
 VOLUME /app/chroma_db
 
 # Start FastAPI app
-CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "-m", "backend.app.main"]
