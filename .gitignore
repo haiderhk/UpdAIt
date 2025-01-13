@@ -176,6 +176,9 @@ saved_articles/
 .DS_Store?
 /vector_db
 
+# Excluding the notebooks directory to be tracked by GitHub
+notebooks/
+
 
 
 
