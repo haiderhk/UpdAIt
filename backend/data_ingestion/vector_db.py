@@ -15,6 +15,10 @@ class VectorDB:
             persist_directory=VECTOR_STORE_DIR
         )
 
+
+    def get_metadatas(self):
+        return self.vector_store.get()['metadatas']
+
     def add_articles(self, dir_name, all_articles_links, all_articles_titles):
         for filename in os.listdir(dir_name):
             if not filename.endswith(".txt"):
@@ -31,6 +35,7 @@ class VectorDB:
                 print(ids)
             self.vector_store.add_texts(texts=docs, ids=ids, metadatas=metadatas)
             time.sleep(0.5)
+
 
     def create_metadata(self, docs, article_index, all_articles_links, all_articles_titles):
         ids = []
