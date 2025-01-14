@@ -37,8 +37,8 @@ The project maintains two parallel CI/CD pipelines, each serving a specific purp
 
 #### AWS Production Deployment (ECR + ECS)
 
-1.  Checkout the latest code from the repository
-2.  Configure AWS credentials securly using repository secrets
+1.  Checks out the latest code from the repository
+2.  Configures AWS credentials securly using repository secrets
 3.  Logs in to Amazon Elastic Container Registry (ECS)
 4.  Builds and tags a Docker image with the latest changes
 5.  Pushes the image to an Amazon ECR repository
@@ -115,3 +115,15 @@ macOS with Xcode installed.
 
 1. Open the frontend folder in Xcode.
 2. Build and run the project on a simulator or a connected iOS device.
+
+## 📱App Showcase
+
+### ✨ Demo Video
+
+Watch UpdAIt in action: [View Full Demo](https://www.youtube.com/watch?v=IGxbcbiQzRY)
+
+### Key Features
+
+#### Home Screen: View the Latest Articles in AI
+
+<table> <tr> <td width="50%"> <img src="assets/HomeScreen.PNG" alt="Home Screen" width="100%"> <p align="center">Static View</p> </td> <td width="50%"> <img src="assets/homescreen.gif" alt="Home Screen Animation" width="100%"> <p align="center">Article Swipe Animation</p> </td> </tr> </table>
