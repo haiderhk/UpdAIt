@@ -120,19 +120,21 @@ git  clone  https://github.com/haiderhk/UpdAIt.git
 
 #### Run Locally
 
+Create Python Virtual Environment and Install dependencies:
+
+```bash
+
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+```
+
 Navigate to the backend folder:
 
 ```bash
 
 cd  backend
-
-```
-
-Install dependencies:
-
-```bash
-
-pip  install  -r  requirements.txt
 
 ```
 
@@ -192,7 +194,7 @@ macOS with Xcode installed.
 
 ### ✨ Demo Video
 
-Watch UpdAIt in action: [View Full Demo](https://www.youtube.com/watch?v=IGxbcbiQzRY)
+Watch UpdAIt in action: [View Full Demo](https://youtu.be/nwUFBrAui4Q)
 
 ### Key Features and Interfaces
 
