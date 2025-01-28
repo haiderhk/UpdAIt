@@ -1,8 +1,8 @@
 import requests, re
 from bs4 import BeautifulSoup
 from urllib.parse import unquote
-from backend.data_ingestion.config import BASE_URL
-from backend.data_ingestion.utils import extract_original_url
+from data_ingestion.config import BASE_URL
+from data_ingestion.utils import extract_original_url
 
 class Scraper:
     def __init__(self, base_url):

@@ -2,8 +2,8 @@ import os, time
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
-from backend.data_ingestion.config import EMBEDDING_MODEL, ARTICLES_COLLECTION_NAME, VECTOR_STORE_DIR
-from backend.data_ingestion.utils import get_article_chunks, parse_article_index, extract_chunk_heading
+from data_ingestion.config import EMBEDDING_MODEL, ARTICLES_COLLECTION_NAME, VECTOR_STORE_DIR
+from data_ingestion.utils import get_article_chunks, parse_article_index, extract_chunk_heading
 
 class VectorDB:
     def __init__(self):

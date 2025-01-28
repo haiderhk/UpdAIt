@@ -1,7 +1,7 @@
-from backend.data_ingestion.vector_db import VectorDB
-from backend.data_ingestion.scraper import Scraper
-from backend.data_ingestion.metadata_schema import ArticleMetadata
-from backend.data_ingestion.config import THE_BATCH_URL
+from data_ingestion.vector_db import VectorDB
+from data_ingestion.scraper import Scraper
+from data_ingestion.metadata_schema import ArticleMetadata
+from data_ingestion.config import THE_BATCH_URL
 
 def process_vector_store_metadatas():
     scraper = Scraper(THE_BATCH_URL)

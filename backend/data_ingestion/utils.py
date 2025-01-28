@@ -2,7 +2,7 @@ import os, re, time
 from urllib.parse import unquote
 from langchain.text_splitter import MarkdownTextSplitter
 
-from backend.data_ingestion.config import ARTICLES_DIRECTORY
+from data_ingestion.config import ARTICLES_DIRECTORY
 
 
 def extract_original_url(url_str):

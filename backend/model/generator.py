@@ -1,11 +1,11 @@
 import os, asyncio
 from langchain_core.prompts import ChatPromptTemplate
 
-from backend.model.llm import LLMManager
-from backend.model.chains import ChainManager
-from backend.model.schema import prompt, QuestionAnswers
-from backend.data_ingestion.vector_db import VectorDB
-from backend.data_ingestion.utils import retrieve_article_text
+from model.llm import LLMManager
+from model.chains import ChainManager
+from model.schema import prompt, QuestionAnswers
+from data_ingestion.vector_db import VectorDB
+from data_ingestion.utils import retrieve_article_text
 
 
 class Generator():

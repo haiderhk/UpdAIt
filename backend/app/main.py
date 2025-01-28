@@ -1,7 +1,7 @@
 import os
 import uvicorn
 from pyngrok import ngrok
-from backend.app import create_app
+from app import create_app
 
 app = create_app()
 

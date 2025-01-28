@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from backend.app.api.routes import router  # Import the router containing all endpoints
-from backend.data_ingestion.ingestion import ingest_articles
+from app.api.routes import router  # Import the router containing all endpoints
+from data_ingestion.ingestion import ingest_articles
 
 from contextlib import asynccontextmanager, AbstractAsyncContextManager
 

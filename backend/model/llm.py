@@ -1,5 +1,5 @@
 from langchain_openai import ChatOpenAI
-from backend.data_ingestion.vector_db import VectorDB
+from data_ingestion.vector_db import VectorDB
 
 class LLMManager:
     def __init__(self, model="gpt-4o-mini", temperature=0.8, max_tokens=1024):
