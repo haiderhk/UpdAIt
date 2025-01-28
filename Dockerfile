@@ -8,7 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
-COPY backend ./backend
+COPY backend .
 
 # Expose API port
 EXPOSE 8000
@@ -17,4 +17,4 @@ EXPOSE 8000
 VOLUME /app/vector_store
 
 # Start FastAPI app
-CMD ["python", "-m", "backend.app.main"]
+CMD ["python", "-m", "app.main"]
