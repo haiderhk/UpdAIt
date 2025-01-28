@@ -118,7 +118,9 @@ git  clone  https://github.com/haiderhk/UpdAIt.git
 
 ### 2. Backend Setup
 
+
 #### Run Locally
+Create a .env file with your OPENAI_API_KEY in it.
 
 Create Python Virtual Environment and Install dependencies:
 
@@ -142,7 +144,7 @@ Start the backend server:
 
 ```bash
 
-python  -m  backend.app.main
+python -m app.main
 
 ```
 
